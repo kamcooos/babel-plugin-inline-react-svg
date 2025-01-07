@@ -27,14 +27,19 @@ export default declare(({
     SVG_DEFAULT_PROPS_CODE,
   }) => {
     const namedTemplate = `
-      var SVG_NAME = function SVG_NAME(props = SVG_DEFAULT_PROPS_CODE) { return SVG_CODE; };
-      ${IS_EXPORT ? 'export { SVG_NAME };' : ''}
-    `;
+  var SVG_NAME = function SVG_NAME(props) { 
+    return SVG_CODE; 
+  };
+  ${IS_EXPORT ? 'export { SVG_NAME };' : ''}
+`;
+
     const anonymousTemplate = `
-      var Component = function (props = SVG_DEFAULT_PROPS_CODE) { return SVG_CODE; };
-      Component.displayName = 'EXPORT_FILENAME';
-      export default Component;
-    `;
+  var Component = function (props) { 
+    return SVG_CODE; 
+  };
+  Component.displayName = 'EXPORT_FILENAME';
+  export default Component;
+`;
 
     if (SVG_NAME !== 'default') {
       return template(namedTemplate)({ SVG_NAME, SVG_CODE, SVG_DEFAULT_PROPS_CODE });
